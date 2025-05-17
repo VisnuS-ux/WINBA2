@@ -1810,6 +1810,142 @@
         transform: scale(1.1);
         box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
     }
+
+    /* Add this in your CSS section */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #166534;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out;
+}
+
+.loader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader img {
+    width: 150px;
+    animation: pulse 1.5s infinite;
+}
+
+.partners {
+    background-color: var(--gray-100);
+    padding: 60px 0;
+    text-align: center;
+}
+
+.partners-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.partner-logo img {
+    max-width: 200px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.partner-logo img:hover {
+    transform: scale(1.1);
+}
+
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.video-showcase {
+    background-color: var(--white);
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.video-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.video-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-content {
+    padding: 20px;
+}
+
+.video-content h3 {
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+.video-content p {
+    color: var(--text);
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
     </style>
 </head>
 <body>
@@ -1840,8 +1976,13 @@
         </div>
     </header>
 
+    
+
     <!-- Hero Section -->
     <section class="hero section" id="home">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="asset/hero-bg.mp4" type="video/mp4">
+        </video>
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">Professional Badminton Training for Champions</h1>
@@ -1867,7 +2008,7 @@
             </div>
             <div class="about-content">
                 <div class="about-image" data-aos="fade-right" data-aos-duration="1000">
-                    <img src="asset/Grouppic.jpeg" alt="Badminton Training at WIN Academy">
+                    <img src="asset/Coach.jpeg" alt="Badminton Training at WIN Academy">
                 </div>
                 <div class="about-text" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
                     <h3>Welcome to WIN Badminton Academy</h3>
@@ -1879,6 +2020,36 @@
             </div>
         </div>
     </section>
+
+    <!-- Video Showcase Section -->
+<section class="video-showcase section">
+    <div class="container">
+        <div class="section-title-wrapper">
+            <span class="section-subtitle">Watch & Learn</span>
+            <h2 class="section-title">Training Highlights</h2>
+        </div>
+        <div class="video-grid">
+            <div class="video-card" data-aos="fade-up">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="video-content">
+                    <h3>Training Techniques</h3>
+                    <p>Learn about our professional training methods</p>
+                </div>
+            </div>
+            <div class="video-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="video-content">
+                    <h3>Student Success Stories</h3>
+                    <p>See how our students have improved their game</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- Vision & Mission Section -->
     <section class="vision-mission section">
@@ -1894,7 +2065,7 @@
                 </div>
                 <div class="vm-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                     <h3>Our Mission</h3>
-                    <p>To deliver professional badminton training in a safe, supportive, and inclusive environment. We aim to promote the physical, mental, and social benefits of sports while developing confident, disciplined, and high-performing s. </p>
+                    <p>To deliver professional badminton training in a safe, supportive, and inclusive environment. We aim to promote the physical, mental, and social benefits of sports while developing confident, disciplined, and high-performing athletes. </p>
                 </div>
             </div>
         </div>
@@ -1910,7 +2081,7 @@
             <div class="services-container">
                 <div class="service-card" data-aos="fade-up" data-aos-duration="1000">
                     <div class="service-image">
-                        <img src="asset/School.jpeg" alt="Junior Training Program">
+                        <img src="asset/Group1.jpeg" alt="Junior Training Program">
                     </div>
                     <div class="service-icon">
                         <i class="fas fa-child"></i>
@@ -1941,7 +2112,7 @@
                             <li>Guidance on physical conditioning</li>
                             <li>Injury prevention</li>
                             <li>Strategic game understanding</li>
-                            <li>nutrition to complement technical training and enhance overall athletic performance</li>
+                            <li>Nutrition to complement technical training and enhance overall athletic performance</li>
                         </ul>
                     </div>
                 </div>
@@ -1993,19 +2164,19 @@
                 </div>
                 <div class="service-content">
                     <h3>School & Corporate Team training program</h3>
-                    <p>Sport-specific fitness training to enhance performance and prevent injuries.</p>
+                    <p>Support school teams and corporate groups with a structured training program.</p>
                     <ul>
-                        <li>Badminton-specific agility</li>
-                        <li>Strength and endurance</li>
-                        <li>We offer customized badminton training programs tailored for corporate organizations and schools</li>
-                        <li>Recovery techniques</li>
+                        <li>Developing Badminton skills and techniques</li>
+                        <li>Teamwork and discipline</li>
+                        <li>Fitness and conditioning</li>
+                        <li>Preparation for competitive and recrational purposes</li>
                     </ul>
                 </div>
             </div>
 
                 <div class="service-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
                 <div class="service-image">
-                    <img src="asset/GTraining.jpeg" alt="Fitness Training">
+                    <img src="asset/fitness.jpeg" alt="Fitness Training">
                 </div>
                 <div class="service-icon">
                     <i class="fas fa-school"></i>
@@ -2016,14 +2187,14 @@
                     <ul>
                         <li>A specific conditioning program will be developed according to athletes' sports needs.</li>
                         <li>Athletes will be trained in a high-energy.</li>
-                        <li>result-driven environment while maintaining the individualized atention that proper athletic development requires.</li>
+                        <li>Result-driven environment while maintaining the individualized attention that proper athletic development requires.</li>
                     </ul>
                 </div>
             </div>
             
             <div class="service-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000">
                 <div class="service-image">
-                    <img src="asset/Camp.jpeg" alt="Holiday Training Camps">
+                    <img src="asset/Tournoment.jpeg" alt="Holiday Training Camps">
                 </div>
                 <div class="service-icon">
                     <i class="fas fa-calendar-alt"></i>
@@ -2033,14 +2204,16 @@
                     <p>Intensive training camps during school holidays for accelerated improvement.</p>
                     <ul>
                         <li>Hosting and managing tournaments.</li>
-                        <li> provide real match experience.</li>
-                        <li>exposure for players. </li>
+                        <li>Provide real match experience.</li>
+                        <li>Exposure for players. </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
 
 <!-- Locations & Schedule Section -->
 <section class="locations section" id="locations">
@@ -2108,7 +2281,7 @@
         </div>
     </div>
 </section>
-<!-- Head Coache Section -->
+<!-- Head Coaches Section -->
 <section class="team section" id="team">
     <div class="container">
         <div class="section-title-wrapper">
@@ -2160,9 +2333,8 @@
                     <h3>Dhinesh Veerappan</h3>
                     <h4>Head Coach</h4>
                     <ul class="coach-qualifications">
-                        <li>Former National Team Player</li>
-                        <li>BWF Level 3 Certified Coach</li>
-                        <li>20+ Years Coaching Experience</li>
+                        <li>Former State Team Player</li>
+                        <li>10+ Years Coaching Experience</li>
                         <li>Trained Multiple National Champions</li>
                     </ul>
                     <div class="coach-social">
@@ -2181,8 +2353,7 @@
                     <h3>Vimalarasu</h3>
                     <h4>Junior Development Coach</h4>
                     <ul class="coach-qualifications">
-                        <li>Former State Team Player</li>
-                        <li>BWF Level 2 Certified Coach</li>
+                        <li>Former University Player</li>
                         <li>Specialized in Youth Development</li>
                         <li>Physical Education Degree</li>
                     </ul>
@@ -2203,7 +2374,6 @@
                     <h4>Performance Coach</h4>
                     <ul class="coach-qualifications">
                         <li>International Player Experience</li>
-                        <li>BWF Level 3 Certified Coach</li>
                         <li>Strength & Conditioning Specialist</li>
                         <li>Sports Science Background</li>
                     </ul>
@@ -2304,42 +2474,42 @@
         </div>
         <div class="gallery-container">
             <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000">
-                <img src="asset/Trophy3.jpeg" alt="Training Session">
+                <img src="asset/GTraining.jpeg" alt="Training Session">
                 <div class="gallery-caption">
                     <h4>Group Training</h4>
                     <p>Weekend intermediate session</p>
                 </div>
             </div>
             <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
-                <img src="asset/Malay.jpeg" alt="Junior Camp">
+                <img src="asset/Trophy3.jpeg" alt="Junior Camp">
                 <div class="gallery-caption">
                     <h4>Junior Camp</h4>
                     <p>School holiday special program</p>
                 </div>
             </div>
             <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                <img src="asset/Altogether.jpeg" alt="Tournament Winners">
+                <img src="asset/Tour.jpeg" alt="Tournament Winners">
                 <div class="gallery-caption">
                     <h4>Tournament Champions</h4>
                     <p>State junior championship</p>
                 </div>
             </div>
             <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-                <img src="asset/Sutharshan.jpeg" alt="Private Coaching">
+                <img src="asset/Haq.jpeg" alt="Private Coaching">
                 <div class="gallery-caption">
                     <h4>One-on-One Training</h4>
                     <p>Private coaching session</p>
                 </div>
             </div>
             <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-                <img src="asset/Trophy1.jpeg" alt="Fitness Training">
+                <img src="asset/Sutharshan.jpeg" alt="Fitness Training">
                 <div class="gallery-caption">
                     <h4>Fitness Session</h4>
                     <p>Conditioning for elite players</p>
                 </div>
             </div>
             <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
-                <img src="asset/Trophy2.jpg" alt="Academy Facilities">
+                <img src="asset/Trophy2.jpeg" alt="Academy Facilities">
                 <div class="gallery-caption">
                     <h4>Our Facilities</h4>
                     <p>Seremban main center</p>
@@ -2348,7 +2518,23 @@
         </div>
     </div>
 </section>
-
+<!-- Partners Section -->
+<section class="partners section" id="partners">
+    <div class="container">
+        <div class="section-title-wrapper">
+            <span class="section-subtitle">Our Partners</span>
+            <h2 class="section-title">Official Partners</h2>
+        </div>
+        <div class="partners-container">
+            <div class="partner-logo" data-aos="fade-up" data-aos-duration="1000">
+                <img src="asset/ProBg.png" alt="Partner 1 Logo">
+            </div>
+            <div class="partner-logo" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                <img src="asset/FitlabBg.png" alt="Partner 2 Logo">
+            </div>
+        </div>
+    </div>
+</section>
 <!-- FAQ Section -->
 <section class="faq section" id="faq">
     <div class="container">
@@ -2433,7 +2619,7 @@
                         </div>
                         <div class="contact-details">
                             <h4>Email Address</h4>
-                            <a href="mailto:info@winbadminton.com">info@winbadminton.com</a>
+                            <a href="mailto:info@winbadminton.com">winba9995@gmail.com</a>
                         </div>
                     </li>
                     <li>
@@ -2442,36 +2628,10 @@
                         </div>
                         <div class="contact-details">
                             <h4>Office Hours</h4>
-                            <p>Monday - Friday: 10:00 AM - 7:00 PM<br>Saturday: 9:00 AM - 5:00 PM</p>
+                            <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday $ Sunday: 9:00 AM - 5:00 PM</p>
                         </div>
                     </li>
                 </ul>
-            </div>
-            
-            <div class="contact-form" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
-                <form action="#" method="post" id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Your Message</label>
-                        <textarea id="message" name="message" class="form-control" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-secondary">Send Message</button>
-                </form>
             </div>
         </div>
     </div>
@@ -2506,28 +2666,6 @@
                     <li><a href="#gallery">Gallery</a></li>
                 </ul>
             </div>
-            
-            <div class="footer-links">
-                <h3 class="footer-title">Programs</h3>
-                <ul>
-                    <li><a href="#services">Group Training</a></li>
-                    <li><a href="#services">Strength & Conditioning Training</a></li>
-                    <li><a href="#services">Elite Training Program</a></li>
-                    <li><a href="#services">Private Coaching</a></li>
-                    <li><a href="#services">School & Corporate Team Training</a></li>
-                    <li><a href="#services">Athlete Development Program</a></li>
-                    <li><a href="#services">Organizing Tournoments</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-newsletter">
-                <h3 class="footer-title">Newsletter</h3>
-                <p>Subscribe to our newsletter to receive updates on programs, events, and special promotions.</p>
-                <div class="newsletter-form">
-                    <input type="email" class="newsletter-input" placeholder="Your Email Address">
-                    <button class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
-                </div>
-            </div>
         </div>
     </div>
     <div class="footer-bottom">
@@ -2545,6 +2683,13 @@
         offset: 100,
         duration: 800
     });
+    // Add this to your JavaScript section
+window.addEventListener('load', () => {
+    const loader = document.querySelector('.loader');
+    setTimeout(() => {
+        loader.classList.add('fade-out');
+    }, 1000);
+});
     
     // Header Scroll Effect
     const header = document.getElementById('header');
@@ -2621,6 +2766,7 @@
             }
         });
     }
+    
 </script>
  <a href="https://wa.me/194462507" class="whatsapp-btn" target="_blank">
     <i class="fab fa-whatsapp"></i>
